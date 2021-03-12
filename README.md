@@ -9,7 +9,7 @@ P.O:
   [Wesley Vinicius Silva](https://www.linkedin.com/in/wesley-vinicius-silva-8568a516b/)
     
 Dev Team:  
-  [Ana Carolina S. de Moura](https://www.linkedin.com/in/ana-carolina-simplicio-de-moura-84bb49148/)  
+  [Ana Carolina Simplicio de Moura](https://www.linkedin.com/in/ana-carolina-simplicio-de-moura-84bb49148/)  
   [André Ricardo de Souza](https://www.linkedin.com/in/andr%C3%A9-ricardo-souza-e-silva/)
   [Gabriel Pereira Bastos](https://www.linkedin.com/in/gabriel-pereira-bastos/)  
   [Maria Clara Oliveira](https://www.linkedin.com/in/oliveira-mclaraa/)  
