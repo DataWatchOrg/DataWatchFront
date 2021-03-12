@@ -16,17 +16,15 @@ Dev Team:
   [Railson Tales de Oliveira](https://www.linkedin.com/in/railson-tales/)  
   [Rone Felipe Bento](https://www.linkedin.com/in/ronefellipebento/)
 
-- Introdução do projeto
-
-  - A aplicação é um gerador de evidencia para a utilização de dados pessoais.
-
-  - Para a utilização do sistema, o banco de dados do cliente deve estar ajustado em relação a LGPD, há também a necessidade de adaptação do banco de dados para cumprir os       requisitos do DataWatch.
-
-  - O DataWatch irá se conectar a um banco de dados já existente de um cliente e realizar o monitoramento de todos os dados pessoais gerando logs com assinaturas baseadas em SHA256 e usando criptografia simétrica para os dados pessoais. Desta forma os logs poderão mostrar todas as alterações feitas naquele dado pessoal, mostrando também quando isso foi feito.
-
 - Objetivo
   
-  - Ajustar as informações de clientes para que as normas relacionadas a LGPD sejam cumpridas.
+  - Resolver o problema da privacidade dos dados que é garantido pela lei da LGPD, para que caso algum dado precise ser verificado, de quando ele foi compartilhado, acessado ou modificado, isso esteja guardado para uma possivel auditoria.
+
+- Solução e introdução do projeto
+
+  - A aplicação é um gerador de evidencia para a utilização de dados pessoais.
+  - A aplicação é um middleware que ficara encarregado de interceptar as requests de um software e gerar um log dos dados sensíveis e pessoais que estão presentes nessa request.
+  - O DataWatch irá logar todas as informações relevantes como quem teve acesso a esse dado e quando. Os dados ficaram criptografados em nosso banco de dados para que garanta a privacidade dos dados.
 
 ### Cronograma de entregas
 
