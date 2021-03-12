@@ -18,17 +18,10 @@ Dev Team:
 
 - Objetivo
   
-  - Resolver o problema da privacidade dos dados que é garantido pela lei da LGPD, para que caso algum dado precise ser verificado, de quando ele foi compartilhado, acessado ou modificado, isso esteja guardado para uma possivel auditoria.
+  - Resolver o problema de monitoramento e geração de evidência dos dados que é garantido pela lei da LGPD, para que caso algum dado precise ser verificado, de quando ele foi compartilhado, acessado ou modificado, isso esteja guardado para uma possivel auditoria.
 
 - Solução e introdução do projeto
 
-  - A aplicação é um gerador de evidencia para a utilização de dados pessoais.
+  - A aplicação é um gerador de evidencia para a utilização de dados sensíveis e pessoais.
   - A aplicação é um middleware que ficara encarregado de interceptar as requests de um software e gerar um log dos dados sensíveis e pessoais que estão presentes nessa request.
-  - O DataWatch irá logar todas as informações relevantes como quem teve acesso a esse dado e quando. Os dados ficaram criptografados em nosso banco de dados para que garanta a privacidade dos dados.
-
-### Cronograma de entregas
-
-- **Sprint 1** - Desenvolvimento do backend de forma funcional usando uma massa de dados em um arquivo .csv inicialmente.
-Desta forma o cliente já poderia usar o sistema para realizar os monitoramentos levando em conta que existe a possibilidade de exportar dados de um banco de dados para um arquivo .csv.
-
-------------
+  - O DataWatch irá logar todas as informações relevantes como quem teve acesso a esse dado e quando. Os dados ficarão criptografados em nosso banco de dados para que garanta a privacidade dos dados.
