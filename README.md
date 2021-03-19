@@ -6,9 +6,9 @@ npm install
 ```
 
 #### Executar aplicação ambiente local de desenvolvimento
-
-npm run dev (hot realoading - nodemon)
-
+```
+npm run dev 
+```
 ### Integrantes:
   
 Scrum Master:  
