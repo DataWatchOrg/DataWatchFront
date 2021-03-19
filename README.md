@@ -1,5 +1,14 @@
 ## Tópicos Avançados em Banco de Dados
 
+### Inicializar download de dependências
+```
+npm install
+```
+
+#### Executar aplicação ambiente local de desenvolvimento
+
+npm run dev (hot realoading - nodemon)
+
 ### Integrantes:
   
 Scrum Master:  
