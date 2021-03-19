@@ -5,13 +5,9 @@ const Main = new Schema({
     nome:{
         type: String,
         required: true
-    },slug:{
+    },endereco:{
         type: String,
         required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now()
     }
 })
 
