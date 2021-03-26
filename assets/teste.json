@@ -1,4 +1,12 @@
 {
-    "nome": "freddie mercury",
-    "endereco": "Casa da mãe joana"
+	"id": 4,
+    "tipo_de_requisicao": "Put",
+	"nome": "Reginaldo",
+	"email": "reginaldo@email.com",
+	"telefone": "360-357-69122",
+    "raça" : "Black or African American",
+	"materias": [],
+	"permissao": {
+		"nome": "ROLE_PROFESSOR"
+	}
 }

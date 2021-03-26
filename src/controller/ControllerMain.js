@@ -5,18 +5,31 @@ const fs = require('fs')
 
 require('../model/Main');
 const Main = mongoose.model("main")
+const campos_dados_pessoais = ['nome', 'email', 'telefone', 'raça']
 
 router.get('/saveJSON', (req, res) => {
-    /* Realiza a leitura do arquivo teste */
     fs.readFile('./assets/teste.json', 'utf-8', (error, data) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
         }
         
-        /* Salva o conteúdo do arquivo transformado em JSON no banco */
-        new Main(JSON.parse(data)).save().then((e) => {
-            res.status(200).json(e) 
-        }) 
+        const json = JSON.parse(data)
+        const updated_fields = {
+            'id_usuario': json.id,
+            'data': new Date(),
+            'tipo_de_requisicao': json.tipo_de_requisicao,
+            'campos_alterados': Object.keys(json).filter((key) => {
+                return campos_dados_pessoais.includes(key)
+            })
+        }
+
+        if (updated_fields.campos_alterados.length > 0) {
+            new Main(updated_fields).save().then((e) => {
+                res.status(200).json(e) 
+            })
+        } else {
+            res.status(200).json()
+        }
     })
 });
 
