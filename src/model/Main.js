@@ -20,4 +20,5 @@ const Main = new Schema({
     }
 })
 
-mongoose.model("main", Main);
+mainModel = mongoose.model("main", Main);
+module.exports = mainModel;

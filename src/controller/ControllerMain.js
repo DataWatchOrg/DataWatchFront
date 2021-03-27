@@ -1,18 +1,23 @@
-const express =  require("express")
+const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
 const fs = require('fs')
 const { Parser } = require('json2csv');
-require('../model/Main');
-const Main = mongoose.model("main")
-const campos_dados_pessoais = ['nome', 'email', 'telefone', 'raça']
 
-router.get('/saveJSON', (req, res) => {
+Main = require('../model/Main');
+monitoredDataModel = require('../model/MonitoredData');
+const lista_campos_dados_pessoais = async () => {
+    return (await monitoredDataModel.find()).map(f => f.dado)
+}
+
+router.get('/saveJSON', async (req, res) => {
+    campos_dados_pessoais = await lista_campos_dados_pessoais()
+
     fs.readFile('./assets/teste.json', 'utf-8', (error, data) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
         }
-        
+             
         const json = JSON.parse(data)
         const updated_fields = {
             'id_usuario': json.id,
