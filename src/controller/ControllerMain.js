@@ -2,7 +2,7 @@ const express =  require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
 const fs = require('fs')
-
+const { Parser } = require('json2csv');
 require('../model/Main');
 const Main = mongoose.model("main")
 const campos_dados_pessoais = ['nome', 'email', 'telefone', 'raça']
@@ -33,6 +33,29 @@ router.get('/saveJSON', (req, res) => {
     })
 });
 
+router.get('/relatorio', (req, res) => {
+   
+   Main.find().then((itens) => {
+        const relatorio = []
+            itens.forEach(obj => {
+                    var campos = '';
+                    obj.campos_alterados.forEach(campo => {
+                        campos += campo+'\t - '
+                    });
+                relatorio.push({ campos_alterados: campos, id_usuario: obj.id_usuario, data: obj.data, requisicao: obj.tipo_de_requisicao });
+            });
+
+        const json2csvParser = new Parser({ delimiter: ';'});
+        const tsv = json2csvParser.parse(relatorio);
+
+        res.setHeader("charset", "utf-8");
+        res.header("Content-Type", "text/csv; charset=utf-8");
+        res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv");
+        res.status(200).end(tsv);
+   })
+  
+
+});
 router.get('/', (req, res) => {
 
 });
