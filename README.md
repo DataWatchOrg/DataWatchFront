@@ -34,3 +34,19 @@ Dev Team:
   - A aplicação é um gerador de evidencia para a utilização de dados sensíveis e pessoais.
   - A aplicação é um middleware que ficara encarregado de interceptar as requests de um software e gerar um log dos dados sensíveis e pessoais que estão presentes nessa request.
   - O DataWatch irá logar todas as informações relevantes como quem teve acesso a esse dado e quando. Os dados ficarão criptografados em nosso banco de dados para que garanta a privacidade dos dados.
+  
+### Cronograma de entregas
+
+- [x] **Sprint 1** - Server CRUD e Banco de Dados
+
+-------------
+
+
+
+### Primeira entrega - Server CRUD e Banco de Dados.
+
+- Server CRUD configurado inicialmente para processar um arquivo .JSON simulando uma requisição da aplicação do cliente.
+- Banco de Dados MongoDB configurado para receber o registro gerado pelo Server CRUD.
+- Relatório .CSV dos registros processados e armazenados no MongoDB pelo Server CRUD.
+  
+Vídeo de apresentação da primeira sprint: 
