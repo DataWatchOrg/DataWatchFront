@@ -49,4 +49,4 @@ Dev Team:
 - Banco de Dados MongoDB configurado para receber o registro gerado pelo Server CRUD.
 - Relatório .CSV dos registros processados e armazenados no MongoDB pelo Server CRUD.
   
-Vídeo de apresentação da primeira sprint: 
+Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvKmITOH9ao
