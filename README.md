@@ -37,16 +37,26 @@ Dev Team:
   
 ### Cronograma de entregas
 
-- [x] **Sprint 1** - Server CRUD e Banco de Dados
+- [x] **Sprint 1** - Server CRUD e Banco de Dados (28/03/2021)
+- [ ] **Sprint 2** - Middleware (18/04/2021)
+- [ ] **Sprint 3** - Segurança e Integridade (16/05/2021)
 
 -------------
 
 
 
-### Primeira entrega - Server CRUD e Banco de Dados.
+### Primeira entrega - Server CRUD e Banco de Dados. (28/03/2021)
 
 - Server CRUD configurado inicialmente para processar um arquivo .JSON simulando uma requisição da aplicação do cliente.
 - Banco de Dados MongoDB configurado para receber o registro gerado pelo Server CRUD.
 - Relatório .CSV dos registros processados e armazenados no MongoDB pelo Server CRUD.
   
 Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvKmITOH9ao
+  
+### Segunda entrega - Middleware. (18/04/2021)
+  
+Nesta sprint entregaremos o Middleware que irá interceptar requisições na aplicação do cliente. Tais requisições serão enviadas para o Server CRUD, que irá alimentar nosso banco de dados, de onde serão extraídos os relatórios de acesso a dados pessoais e pessoais sensíveis.
+  
+### Terceira entrega - Segurança e Integridade (16/05/2021)
+  
+Nesta sprint aplicaremos requisitos de segurança e integridade, utilizando assinatura digital e criptografia, garantindo maior proteção no trafego das requisições do Middleware para o Server CRUD.
