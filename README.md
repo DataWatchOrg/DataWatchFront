@@ -35,6 +35,8 @@ Dev Team:
   - A aplicação é um middleware que ficara encarregado de interceptar as requests de um software e gerar um log dos dados sensíveis e pessoais que estão presentes nessa request.
   - O DataWatch irá logar todas as informações relevantes como quem teve acesso a esse dado e quando. Os dados ficarão criptografados em nosso banco de dados para que garanta a privacidade dos dados.
   
+![]()ArquiteturaDataWatch.png  
+  
 ### Cronograma de entregas
 
 - [x] **Sprint 1** - Server CRUD e Banco de Dados (28/03/2021)
