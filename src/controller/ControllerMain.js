@@ -4,10 +4,15 @@ const mongoose = require("mongoose")
 const fs = require('fs')
 const { Parser } = require('json2csv');
 require('../model/Main');
+require('../model/MonitoredData');
 const Main = mongoose.model("main")
-const campos_dados_pessoais = ['nome', 'email', 'telefone', 'raça']
+const MonitoredData = mongoose.model("monitoredData")
+let campos_dados_pessoais
 
-router.get('/saveJSON', (req, res) => {
+router.get('/saveJSON', async (req, res) => {
+
+    campos_dados_pessoais = (await MonitoredData.find()).map(d => d.dado)
+
     fs.readFile('./assets/teste.json', 'utf-8', (error, data) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
