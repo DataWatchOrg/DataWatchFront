@@ -18,7 +18,10 @@ amqp.connect(rabbitUri, function(error0, connection) {
 
         console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue)
         channel.consume(queue, function(msg) {
-            console.log(" [x] Received %s", msg.content.toString());
+            let payload = JSON.parse(msg.content.toString());
+            console.log(payload.header);
+            let method = payload.header.method;
+            let body = payload.body;
         }, {
             noAck: true
         });

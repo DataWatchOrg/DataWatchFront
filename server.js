@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 var cors = require('cors')
 require('./src/database')
+require('./src/service')
 const app =  express();
 
 app.use(bodyParser.urlencoded({extended: false}))
