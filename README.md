@@ -9,6 +9,7 @@ npm install
 ```
 npm run dev 
 ```
+
 ### Integrantes:
   
 Scrum Master:  
@@ -42,6 +43,7 @@ Dev Team:
 - [x] **Sprint 1** - Server CRUD e Banco de Dados (28/03/2021)
 - [ ] **Sprint 2** - Middleware (18/04/2021)
 - [ ] **Sprint 3** - Segurança e Integridade (16/05/2021)
+- [ ] **Sprint 4** - Interface Web (05/06/2021)
 
 -------------
 
@@ -62,3 +64,7 @@ Nesta sprint entregaremos o Middleware que irá interceptar requisições na apl
 ### Terceira entrega - Segurança e Integridade (16/05/2021)
   
 Nesta sprint aplicaremos requisitos de segurança e integridade, utilizando assinatura digital e criptografia, garantindo maior proteção no trafego das requisições do Middleware para o Server CRUD.
+  
+### Quarta entrega - Interface Web (05/06/2021)  
+  
+Nesta sprint iremos entregar a interface web do DataWatch contendo a funcionalidade de consultar ou fazer o download do relatório, simplificando assim a forma de visualização das evidências registradas.
