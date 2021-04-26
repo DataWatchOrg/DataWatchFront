@@ -1,4 +1,4 @@
-const express =  require("express")
+const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
 const fs = require('fs')
@@ -17,7 +17,7 @@ router.get('/saveJSON', async (req, res) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
         }
-        
+             
         const json = JSON.parse(data)
         const updated_fields = {
             'id_usuario': json.id,
