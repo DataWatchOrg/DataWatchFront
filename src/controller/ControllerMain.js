@@ -3,15 +3,15 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const fs = require('fs')
 const { Parser } = require('json2csv');
-
-Main = require('../model/Main');
-monitoredDataModel = require('../model/MonitoredData');
-const lista_campos_dados_pessoais = async () => {
-    return (await monitoredDataModel.find()).map(f => f.dado)
-}
+require('../model/Main');
+require('../model/MonitoredData');
+const Main = mongoose.model("main")
+const MonitoredData = mongoose.model("monitoredData")
+let campos_dados_pessoais
 
 router.get('/saveJSON', async (req, res) => {
-    campos_dados_pessoais = await lista_campos_dados_pessoais()
+
+    campos_dados_pessoais = (await MonitoredData.find()).map(d => d.dado)
 
     fs.readFile('./assets/teste.json', 'utf-8', (error, data) => {
         if (error) {

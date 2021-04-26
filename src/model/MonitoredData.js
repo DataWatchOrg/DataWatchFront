@@ -8,5 +8,4 @@ const MonitoredData = new Schema({
     }
 })
 
-monitoredDataModel = mongoose.model("monitoredData", MonitoredData, "monitoredData");
-module.exports = monitoredDataModel;
+mongoose.model("monitoredData", MonitoredData, "monitoredData");
