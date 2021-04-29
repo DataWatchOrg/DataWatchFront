@@ -41,7 +41,7 @@ Dev Team:
 ### Cronograma de entregas
 
 - [x] **Sprint 1** - Server CRUD e Banco de Dados (28/03/2021)
-- [ ] **Sprint 2** - Middleware (18/04/2021)
+- [x] **Sprint 2** - Middleware (18/04/2021)
 - [ ] **Sprint 3** - Segurança e Integridade (16/05/2021)
 - [ ] **Sprint 4** - Interface Web (05/06/2021)
 
@@ -58,8 +58,10 @@ Dev Team:
 Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvKmITOH9ao
   
 ### Segunda entrega - Middleware. (18/04/2021)
-  
-Nesta sprint entregaremos o Middleware que irá interceptar requisições na aplicação do cliente. Tais requisições serão enviadas para o Server CRUD, que irá alimentar nosso banco de dados, de onde serão extraídos os relatórios de acesso a dados pessoais e pessoais sensíveis.
+
+- RabbitMQ (CloudAMPQ) implementado para conexão entre a aplicação do cliente e o Server CRUD.
+- Middleware interceptando requisições na aplicação do cliente (Java) e enviando para a fila do RabbitMQ.
+- Server CRUD consumindo a fila do RabbitMQ e salvando registros no MongoDB (Atlas) para requisições do tipo PUT.
   
 ### Terceira entrega - Segurança e Integridade (16/05/2021)
   
