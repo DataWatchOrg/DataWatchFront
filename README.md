@@ -59,8 +59,8 @@ Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvK
   
 ### Segunda entrega - Middleware. (18/04/2021)
 
-- RabbitMQ (CloudAMPQ) implementado para conexão entre a aplicação do cliente e o Server CRUD.
-- Middleware interceptando requisições na aplicação do cliente (Java) e enviando para a fila do RabbitMQ.
+- RabbitMQ (CloudAMPQ) implementado para conexão entre a [aplicação do cliente](https://github.com/DataWatchOrg/cetriolo-back) e o Server CRUD.
+- Middleware interceptando requisições na [aplicação do cliente](https://github.com/DataWatchOrg/cetriolo-back) (Java) e enviando para a fila do RabbitMQ.
 - Server CRUD consumindo a fila do RabbitMQ e salvando registros no MongoDB (Atlas) para requisições do tipo PUT.
   
 ### Terceira entrega - Segurança e Integridade (16/05/2021)
