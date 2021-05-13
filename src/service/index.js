@@ -44,21 +44,22 @@ amqp.connect(rabbitUri, function(error0, connection) {
                 dictToSave['campos_alterados'] = [];
             }
 
-            // const dictToSave = {
-            //     'data': new Date(),
-            //     'tipo_de_requisicao': method,
-            //     'campos_alterados': Object.keys(body).filter((key) => {
-            //         return camposDadosPessoais.includes(key)
-            //     })
-            // }
-            
-            // if (body.id) {
-            //     dictToSave['id_usuario'] = body.id
-            // }
+            if (header.method === 'PUT') {
+                const body = payload.body ? payload.body : {};
+
+                dictToSave['data'] = new Date();
+                dictToSave['tipo_de_requisicao'] = header.method;
+                dictToSave['campos_alterados'] = Object.keys(body).filter((key) => {
+                    return camposDadosPessoais.includes(key);
+                })
+                if (body.id) {
+                    dictToSave['id_usuario'] = body.id;
+                }
+            }
 
             console.log(dictToSave);
 
-            if (dictToSave) {
+            if (Object.keys(dictToSave)) {
                 new Main(dictToSave).save().then((e) => {
                     console.log('Request salvo!');
                 })
