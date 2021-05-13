@@ -29,27 +29,38 @@ amqp.connect(rabbitUri, function(error0, connection) {
         console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue)
         channel.consume(queue, function (msg) {
             const payload = JSON.parse(msg.content.toString());
+            let dictToSave ={};
             console.log(payload);
-            const method = payload.header.method;
-            const body = payload.body;
 
-            const dictToSave = {
-                'data': new Date(),
-                'tipo_de_requisicao': method,
-                'campos_alterados': Object.keys(body).filter((key) => {
-                    return camposDadosPessoais.includes(key)
-                })
+            const header = payload.header ? payload.header : {};
+
+            if (header.method === 'POST') {
+                const response = payload.response ? payload.response : {};
+                if (response.id) {
+                    dictToSave['id_usuario'] = response.id;
+                }
+                dictToSave['data'] = new Date();
+                dictToSave['tipo_de_requisicao'] = header.method;
+                dictToSave['campos_alterados'] = [];
             }
+
+            // const dictToSave = {
+            //     'data': new Date(),
+            //     'tipo_de_requisicao': method,
+            //     'campos_alterados': Object.keys(body).filter((key) => {
+            //         return camposDadosPessoais.includes(key)
+            //     })
+            // }
             
-            if (body.id) {
-                dictToSave['id_usuario'] = body.id
-            }
+            // if (body.id) {
+            //     dictToSave['id_usuario'] = body.id
+            // }
 
-            console.log(dictToSave)
+            console.log(dictToSave);
 
-            if (dictToSave.campos_alterados.length > 0) {
+            if (dictToSave) {
                 new Main(dictToSave).save().then((e) => {
-                    console.log('Request salvo!')
+                    console.log('Request salvo!');
                 })
             }
         }, {
