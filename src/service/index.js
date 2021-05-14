@@ -59,7 +59,7 @@ amqp.connect(rabbitUri, function(error0, connection) {
 
             console.log(dictToSave);
 
-            if (Object.keys(dictToSave)) {
+            if (Object.keys(dictToSave).length > 0) {
                 new Main(dictToSave).save().then((e) => {
                     console.log('Request salvo!');
                 })
