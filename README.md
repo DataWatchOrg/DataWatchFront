@@ -64,6 +64,8 @@ Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvK
 - Server CRUD consumindo a fila do RabbitMQ e salvando registros no MongoDB (Atlas) para requisições do tipo PUT.
   
 ### Terceira entrega - Segurança e Integridade (16/05/2021)
+
+Nesta sprint aplicaremos requisitos de segurança através de criptografias, garantindo maior proteção no trafego das requisições do Middleware para o Server CRUD.
   
 - Criptografia RSA utilizado para criptografar e descriptografar a chave AES;
 - Criptografia AES utilizado para descriptografar as informações enviadas do cetriolo-back (aplicação do cliente) para o Server-CRUD;
