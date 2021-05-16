@@ -67,7 +67,7 @@ Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvK
 
 Nesta sprint aplicaramos requisitos de segurança através de criptografias, garantindo maior proteção no trafego das requisições do Middleware para o Server CRUD.
   
-- Criptografia RSA utilizado para criptografar e descriptografar a chave AES;
+- Criptografia RSA utilizado para criptografar e descriptografar a chave AES; O Server-CRUD usará a chave privada (key.pem) criada pela aplicação do cliente. A forma de compartilhamento desta chave privada é confidencial.
 - Criptografia AES utilizado para descriptografar as informações enviadas do cetriolo-back (aplicação do cliente) para o Server-CRUD;
 - Hexadecimal implementado durante o envio para codificar de byte para string a chave AES com as informações. No Server-CRUD é feito a decodificação de hexadecimal para byte novamente para dar continuidade no uso da chave AES.
 
