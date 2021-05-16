@@ -1,7 +1,5 @@
 const amqp = require('amqplib/callback_api')
 const NodeRSA = require('node-rsa');
-var CryptoJS = require("crypto-js");
-var crypto = require('crypto');
 var path = require("path");
 var fs = require("fs")
 var aesjs = require("aes-js")
@@ -10,13 +8,11 @@ require('../model/MonitoredData');
 require('../model/Main');
 const MonitoredData = mongoose.model("monitoredData")
 const Main = mongoose.model("main")
-var keySize = 256;
-var iterations = 100;
 
 let camposDadosPessoais = []
-// const getCamposDadosPessoais = MonitoredData.find().lean().exec((err, result) => {
-//     camposDadosPessoais = result.map(d => d.dado)
-// })
+const getCamposDadosPessoais = MonitoredData.find().lean().exec((err, result) => {
+    camposDadosPessoais = result.map(d => d.dado)
+})
 
 const rabbitUri = "amqps://cehwgqgh:bYyZ5ndnh6ZhHl1Gt8U9hQB4HEoCxGtz@owl.rmq.cloudamqp.com/cehwgqgh"
 var AESCrypt = {};
