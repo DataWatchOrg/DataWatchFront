@@ -36,7 +36,6 @@ amqp.connect(rabbitUri, function(error0, connection) {
         channel.consume(queue, function (msg) {
             const payload = JSON.parse(msg.content.toString());
             let dictToSave ={};
-            console.log('\n\njson: \n' , payload);
     
             //Descriptografia da chave AES com a chave privada RSA
             let chaveAESCript = payload.chaveAESCriptografadaRSA
@@ -63,10 +62,13 @@ amqp.connect(rabbitUri, function(error0, connection) {
             var decriptedBytes = aescbc.decrypt(encriptedBytesMessage)
             var message = aesjs.utils.utf8.fromBytes(decriptedBytes)
 
-            const header = payload.header ? payload.header : {};
+            var cleanMessage = message.replace(/[^\x00-\x7F]/g, '').trim();
+            let jsonMessage = JSON.parse(cleanMessage);
+
+            const header = jsonMessage.header ? jsonMessage.header : {};
 
             if (header.method === 'POST') {
-                const response = payload.response ? payload.response : {};
+                const response = jsonMessage.response ? jsonMessage.response : {};
                 if (response.id) {
                     dictToSave['id_usuario'] = response.id;
                 }
@@ -76,7 +78,7 @@ amqp.connect(rabbitUri, function(error0, connection) {
             }
 
             if (header.method === 'PUT') {
-                const body = payload.body ? payload.body : {};
+                const body = jsonMessage.body ? jsonMessage.body : {};
 
                 dictToSave['data'] = new Date();
                 dictToSave['tipo_de_requisicao'] = header.method;
