@@ -65,7 +65,11 @@ Vídeo de apresentação da primeira sprint: https://www.youtube.com/watch?v=GvK
   
 ### Terceira entrega - Segurança e Integridade (16/05/2021)
   
-Nesta sprint aplicaremos requisitos de segurança e integridade, utilizando assinatura digital e criptografia, garantindo maior proteção no trafego das requisições do Middleware para o Server CRUD.
+- Criptografia RSA utilizado para criptografar e descriptografar a chave AES;
+- Criptografia AES utilizado para descriptografar as informações enviadas do cetriolo-back (aplicação do cliente) para o Server-CRUD;
+- Hexadecimal implementado durante o envio para codificar de byte para string a chave AES com as informações. No Server-CRUD é feito a decodificação de hexadecimal para byte novamente para dar continuidade no uso da chave AES.
+
+![](EsquemaSeguranca.png)
   
 ### Quarta entrega - Interface Web (05/06/2021)  
   
