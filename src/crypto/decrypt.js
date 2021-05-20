@@ -28,9 +28,10 @@ const decryptMessage = (payload) => {
     var aescbc = new aesjs.ModeOfOperation.cbc(encriptedBytesAES, encriptedBytesIV)
     var decriptedBytes = aescbc.decrypt(encriptedBytesMessage)
     var message = aesjs.utils.utf8.fromBytes(decriptedBytes)
-    var cleanMessage = message.replace(/[^\x00-\x7F]/g, '').trim()
+    var cleanMessage = message.replace(/[\u0000-\u0019]+/g,"").trim()
+    var jsonMessage = JSON.parse(cleanMessage)
 
-    return cleanMessage
+    return jsonMessage
 }
 
 exports.decryptMessage = decryptMessage;

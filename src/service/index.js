@@ -34,8 +34,7 @@ amqp.connect(rabbitUri, function(error0, connection) {
             const payload = JSON.parse(msg.content.toString());
             let dictToSave ={};
 
-            const message = crypto.decryptMessage(payload);
-            const jsonMessage = JSON.parse(message);
+            const jsonMessage = crypto.decryptMessage(payload);
 
             const header = jsonMessage.header ? jsonMessage.header : {};
 
