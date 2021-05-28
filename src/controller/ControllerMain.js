@@ -63,11 +63,6 @@ router.get('/relatorio', (req, res) => {
 });
 router.get('/listardocumentos', (req, res) => {
     let find = {};
-
-    find.id_usuario = parseInt(req.query.id_usuario) ??  null;
-    find.operacao = req.query.operacao ??  null;
-    find.id_operador = parseInt(req.query.id_operador) ??  null;
-    find.tipo_de_requisicao = parseInt(req.query.tipo_de_requisicao) ??  null;
     Main.find(find).then((itens) => {
         res.json(itens)
     })
