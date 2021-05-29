@@ -3,10 +3,14 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const fs = require('fs')
 const { Parser } = require('json2csv');
+const bcrypt = require('bcryptjs');
 require('../model/Main');
 require('../model/MonitoredData');
+require('../model/Usuario');
 const Main = mongoose.model("main")
 const MonitoredData = mongoose.model("monitoredData")
+const Usuario = mongoose.model("usuario")
+
 let campos_dados_pessoais
 
 router.get('/saveJSON', async (req, res) => {
@@ -61,6 +65,39 @@ router.get('/relatorio', (req, res) => {
   
 
 });
+
+router.post('/usuario/logar', (req, res) => {
+    
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+
+        console.log(bcrypt.compareSync(req.body.senha, usuario.senha))
+        if(!usuario || !bcrypt.compareSync(req.body.senha, usuario.senha)) return res.status(403).send("Usuário ou senha incorreto");
+        else{
+            return res.status(200).json(usuario);
+        }
+    })
+})
+
+router.post('/usuario/cadastrar', (req, res) => {
+   
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+      
+        if(usuario) return res.status(202).send("Usuário já cadastrado");
+        else{
+            req.body.senha = bcrypt.hashSync(req.body.senha, 10);
+            const novoUsuario = new Usuario( req.body)
+            novoUsuario.save().then((e) => {
+                res.status(200).json(e) 
+            }).catch((e) => {
+                res.send(e)
+            })
+        }
+        
+    });
+    
+    
+})
+
 router.get('/', (req, res) => {
 
 });
