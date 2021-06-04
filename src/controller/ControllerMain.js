@@ -71,9 +71,9 @@ router.post('/usuario/logar', (req, res) => {
 
     Usuario.findOne({email: req.body.email}).then((usuario) => {
 
-        if(!!usuario) return res.status(403).send("Usuário ou senha incorreto");
+        if(usuario === null) return res.status(403).send("Usuário ou senha incorreto");
 
-        if(!usuario || !bcrypt.compareSync(get(req, 'body.senha'), get(req, 'senha')))
+        if(!bcrypt.compareSync(req.body.senha, usuario.senha))
             return res.status(403).send("Usuário ou senha incorreto");
         else{
             return res.status(200).json(usuario);
