@@ -1,12 +1,17 @@
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
+const { get } = require('lodash')
 const fs = require('fs')
 const { Parser } = require('json2csv');
+const bcrypt = require('bcryptjs');
 require('../model/Main');
 require('../model/MonitoredData');
+require('../model/Usuario');
 const Main = mongoose.model("main")
 const MonitoredData = mongoose.model("monitoredData")
+const Usuario = mongoose.model("usuario")
+
 let campos_dados_pessoais
 
 router.get('/saveJSON', async (req, res) => {
@@ -17,7 +22,7 @@ router.get('/saveJSON', async (req, res) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
         }
-             
+
         const json = JSON.parse(data)
         const updated_fields = {
             'id_usuario': json.id,
@@ -30,7 +35,7 @@ router.get('/saveJSON', async (req, res) => {
 
         if (updated_fields.campos_alterados.length > 0) {
             new Main(updated_fields).save().then((e) => {
-                res.status(200).json(e) 
+                res.status(200).json(e)
             })
         } else {
             res.status(200).json()
@@ -39,7 +44,7 @@ router.get('/saveJSON', async (req, res) => {
 });
 
 router.get('/relatorio', (req, res) => {
-   
+
    Main.find().then((itens) => {
         const relatorio = []
             itens.forEach(obj => {
@@ -58,12 +63,47 @@ router.get('/relatorio', (req, res) => {
         res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv");
         res.status(200).end(tsv);
    })
-  
+
 
 });
+
+router.post('/usuario/logar', (req, res) => {
+
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+
+        if(!!usuario) return res.status(403).send("Usuário ou senha incorreto");
+
+        if(!usuario || !bcrypt.compareSync(get(req, 'body.senha'), get(req, 'senha')))
+            return res.status(403).send("Usuário ou senha incorreto");
+        else{
+            return res.status(200).json(usuario);
+        }
+    })
+})
+
+router.post('/usuario/cadastrar', (req, res) => {
+
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+
+        if(usuario) return res.status(202).send("Usuário já cadastrado");
+        else{
+            req.body.senha = bcrypt.hashSync(req.body.senha, 10);
+            const novoUsuario = new Usuario( req.body)
+            novoUsuario.save().then((e) => {
+                res.status(200).json(e)
+            }).catch((e) => {
+                res.send(e)
+            })
+        }
+
+    });
+
+
+})
+
 router.get('/listardocumentos', (req, res) => {
     let find = {};
-
+  
     if(req.query.id_usuario) find.id_usuario = parseInt(req.query.id_usuario);
     if(req.query.operacao) find.operacao = req.query.operacao;
     if(req.query.id_operador) find.id_operador = parseInt(req.query.id_operador);
@@ -72,9 +112,7 @@ router.get('/listardocumentos', (req, res) => {
     Main.find(find).then((itens) => {
         res.json(itens)
     })
-    
 });
-
 
 router.get('/listar', (req, res) => {
  
@@ -86,7 +124,7 @@ router.post('/',  (req, res) => {
     new Main({'nome': "freddie mercury", "endereco": "Casa da mãe joana"}).save().then((e) => {
         res.status(200).json(e) /* Teste ao salvar no BD */
     })
-   
+
 });
 
 router.put('/', (req, res) => {
