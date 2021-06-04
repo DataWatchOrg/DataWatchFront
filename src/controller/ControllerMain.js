@@ -101,10 +101,24 @@ router.post('/usuario/cadastrar', (req, res) => {
 
 })
 
-router.get('/', (req, res) => {
+router.get('/listardocumentos', (req, res) => {
+    let find = {};
+  
+    if(req.query.id_usuario) find.id_usuario = parseInt(req.query.id_usuario);
+    if(req.query.operacao) find.operacao = req.query.operacao;
+    if(req.query.id_operador) find.id_operador = parseInt(req.query.id_operador);
+    if(req.query.tipo_de_requisicao) find.tipo_de_requisicao = req.query.tipo_de_requisicao;
 
+    Main.find(find).then((itens) => {
+        res.json(itens)
+    })
 });
 
+router.get('/listar', (req, res) => {
+ 
+
+     res.send("ok");
+});
 router.post('/',  (req, res) => {
     /* Aqui podemos receber algumas coisas :) */
     new Main({'nome': "freddie mercury", "endereco": "Casa da mãe joana"}).save().then((e) => {
