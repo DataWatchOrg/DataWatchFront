@@ -67,7 +67,7 @@ router.get('/listardocumentos', (req, res) => {
     if(req.query.id_usuario) find.id_usuario = parseInt(req.query.id_usuario);
     if(req.query.operacao) find.operacao = req.query.operacao;
     if(req.query.id_operador) find.id_operador = parseInt(req.query.id_operador);
-    if(req.query.tipo_de_requisicao) find.tipo_de_requisicao = parseInt(req.query.tipo_de_requisicao);
+    if(req.query.tipo_de_requisicao) find.tipo_de_requisicao = req.query.tipo_de_requisicao;
 
     Main.find(find).then((itens) => {
         res.json(itens)
