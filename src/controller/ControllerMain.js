@@ -1,10 +1,13 @@
 const express = require("express")
 const router = express.Router()
 const fs = require('fs')
-const { Parser } = require('json2csv')
-const Main = require('../model/Main')
-const MonitoredData = require('../model/MonitoredData')
 const queryBuilder = require('../service/query-builder')
+const { Parser } = require('json2csv');
+const bcrypt = require('bcryptjs');
+const Main = require('../model/Main');
+const MonitoredData = require('../model/MonitoredData');
+const Usuario = require('../model/Usuario');
+
 let campos_dados_pessoais
 
 router.get('/saveJSON', async (req, res) => {
@@ -59,10 +62,59 @@ router.get('/relatorio', (req, res) => {
 
 
 });
-router.get('/', (req, res) => {
 
+router.post('/usuario/logar', (req, res) => {
+
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+
+        if(usuario === null) return res.status(403).send("Usuário ou senha incorreto");
+
+        if(!bcrypt.compareSync(req.body.senha, usuario.senha))
+            return res.status(403).send("Usuário ou senha incorreto");
+        else{
+            return res.status(200).json(usuario);
+        }
+    })
+})
+
+router.post('/usuario/cadastrar', (req, res) => {
+
+    Usuario.findOne({email: req.body.email}).then((usuario) => {
+
+        if(usuario) return res.status(202).send("Usuário já cadastrado");
+        else{
+            req.body.senha = bcrypt.hashSync(req.body.senha, 10);
+            const novoUsuario = new Usuario( req.body)
+            novoUsuario.save().then((e) => {
+                res.status(200).json(e)
+            }).catch((e) => {
+                res.send(e)
+            })
+        }
+
+    });
+
+
+})
+
+router.get('/listardocumentos', (req, res) => {
+    let find = {};
+
+    if(req.query.id_usuario) find.id_usuario = parseInt(req.query.id_usuario);
+    if(req.query.operacao) find.operacao = req.query.operacao;
+    if(req.query.id_operador) find.id_operador = parseInt(req.query.id_operador);
+    if(req.query.tipo_de_requisicao) find.tipo_de_requisicao = req.query.tipo_de_requisicao;
+
+    Main.find(find).then((itens) => {
+        res.json(itens)
+    })
 });
 
+router.get('/listar', (req, res) => {
+
+
+     res.send("ok");
+});
 router.post('/',  (req, res) => {
     /* Aqui podemos receber algumas coisas :) */
     new Main({'nome': "freddie mercury", "endereco": "Casa da mãe joana"}).save().then((e) => {
