@@ -1,12 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const mongoose = require("mongoose")
 const fs = require('fs')
-const { Parser } = require('json2csv');
-require('../model/Main');
-require('../model/MonitoredData');
-const Main = mongoose.model("main")
-const MonitoredData = mongoose.model("monitoredData")
+const { Parser } = require('json2csv')
+const Main = require('../model/Main')
+const MonitoredData = require('../model/MonitoredData')
+const queryBuilder = require('../service/query-builder')
 let campos_dados_pessoais
 
 router.get('/saveJSON', async (req, res) => {
@@ -17,7 +15,7 @@ router.get('/saveJSON', async (req, res) => {
         if (error) {
             throw new Error('Falha na leitura do arquivo.')
         }
-             
+
         const json = JSON.parse(data)
         const updated_fields = {
             'id_usuario': json.id,
@@ -30,7 +28,7 @@ router.get('/saveJSON', async (req, res) => {
 
         if (updated_fields.campos_alterados.length > 0) {
             new Main(updated_fields).save().then((e) => {
-                res.status(200).json(e) 
+                res.status(200).json(e)
             })
         } else {
             res.status(200).json()
@@ -39,7 +37,7 @@ router.get('/saveJSON', async (req, res) => {
 });
 
 router.get('/relatorio', (req, res) => {
-   
+
    Main.find().then((itens) => {
         const relatorio = []
             itens.forEach(obj => {
@@ -58,7 +56,7 @@ router.get('/relatorio', (req, res) => {
         res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv");
         res.status(200).end(tsv);
    })
-  
+
 
 });
 router.get('/', (req, res) => {
@@ -70,7 +68,7 @@ router.post('/',  (req, res) => {
     new Main({'nome': "freddie mercury", "endereco": "Casa da mãe joana"}).save().then((e) => {
         res.status(200).json(e) /* Teste ao salvar no BD */
     })
-   
+
 });
 
 router.put('/', (req, res) => {
@@ -80,5 +78,9 @@ router.put('/', (req, res) => {
 router.delete('/', (req, res) => {
 
 });
+
+router.post('/buscar', async (req, res)=> {
+    res.json(await Main.find(queryBuilder.filterByFields(req.body)))
+})
 
 module.exports = router;
