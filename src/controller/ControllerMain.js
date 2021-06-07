@@ -1,16 +1,12 @@
 const express = require("express")
 const router = express.Router()
-const mongoose = require("mongoose")
-const { get } = require('lodash')
 const fs = require('fs')
+const queryBuilder = require('../service/query-builder')
 const { Parser } = require('json2csv');
 const bcrypt = require('bcryptjs');
-require('../model/Main');
-require('../model/MonitoredData');
-require('../model/Usuario');
-const Main = mongoose.model("main")
-const MonitoredData = mongoose.model("monitoredData")
-const Usuario = mongoose.model("usuario")
+const Main = require('../model/Main');
+const MonitoredData = require('../model/MonitoredData');
+const Usuario = require('../model/Usuario');
 
 let campos_dados_pessoais
 
@@ -103,7 +99,7 @@ router.post('/usuario/cadastrar', (req, res) => {
 
 router.get('/listardocumentos', (req, res) => {
     let find = {};
-  
+
     if(req.query.id_usuario) find.id_usuario = parseInt(req.query.id_usuario);
     if(req.query.operacao) find.operacao = req.query.operacao;
     if(req.query.id_operador) find.id_operador = parseInt(req.query.id_operador);
@@ -115,7 +111,7 @@ router.get('/listardocumentos', (req, res) => {
 });
 
 router.get('/listar', (req, res) => {
- 
+
 
      res.send("ok");
 });
@@ -134,5 +130,9 @@ router.put('/', (req, res) => {
 router.delete('/', (req, res) => {
 
 });
+
+router.post('/buscar', async (req, res)=> {
+    res.json(await Main.find(queryBuilder.filterByFields(req.body)))
+})
 
 module.exports = router;
