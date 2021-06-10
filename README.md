@@ -76,3 +76,7 @@ Nesta sprint aplicaramos requisitos de segurança através de criptografias, gar
 ### Quarta entrega - Interface Web (05/06/2021)  
   
 Nesta sprint iremos entregar a interface web do DataWatch contendo a funcionalidade de consultar ou fazer o download do relatório, simplificando assim a forma de visualização das evidências registradas.
+
+- Sistema de autenticação;
+- Visualização dos logs salvos através da interface web;
+- Download das informações mostradas na interface;
