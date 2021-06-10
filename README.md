@@ -43,7 +43,7 @@ Dev Team:
 - [x] **Sprint 1** - Server CRUD e Banco de Dados (28/03/2021)
 - [x] **Sprint 2** - Middleware (18/04/2021)
 - [x] **Sprint 3** - Segurança e Integridade (16/05/2021)
-- [ ] **Sprint 4** - Interface Web (05/06/2021)
+- [x] **Sprint 4** - Interface Web (05/06/2021)
 
 -------------
 
