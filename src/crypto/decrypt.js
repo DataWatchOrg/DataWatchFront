@@ -9,8 +9,7 @@ const decryptMessage = (payload) => {
     let relativeOrAbsolutePathtoPrivateKey = 'assets/key.pem'
     var absolutePath = path.resolve(relativeOrAbsolutePathtoPrivateKey)
     var privateKey = fs.readFileSync(absolutePath, "utf8")
-    let key = new NodeRSA({b: 1024})
-    key.importKey(privateKey, 'pkcs1')
+    let key = new NodeRSA(privateKey, 'pkcs8')
     var decryptKeyAES = key.decrypt(chaveAESCript)
 
     //Converte a chave AES de hexadecimal para byte
