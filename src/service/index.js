@@ -11,7 +11,7 @@ const getCamposDadosPessoais = MonitoredData.find().lean().exec((err, result) =>
     camposDadosPessoais = result.map(d => d.dado)
 })
 
-const rabbitUri = "amqps://hhzfkiof:H7a48WnpOQqZdu8evXX30WSlQFMAyCU0@jackal.rmq.cloudamqp.com/hhzfkiof"
+const rabbitUri = "amqps://leshjeua:z0mNOy_aGSTEkAR-fLPcUUyc6pwAeTlP@jackal.rmq.cloudamqp.com/leshjeua"
 var AESCrypt = {};
 
 amqp.connect(rabbitUri, function(error0, connection) {
